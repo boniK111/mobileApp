@@ -1,0 +1,63 @@
+@{
+    ViewData["Title"] = "Альфа Софт";
+    var clients = ViewBag.Clients as List<AlfaSoftWeb.Models.Client>;
+    var tickets = ViewBag.Tickets as List<AlfaSoftWeb.Models.Ticket>;
+}
+
+<div class="container" style="max-width: 500px; margin: 0 auto; padding: 10px;">
+
+    <h4 class="text-center mb-3">ИС «Альфа Софт»</h4>
+
+    <!-- КЛИЕНТЫ -->
+    <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="mb-0">Клиенты</h5>
+        <a asp-action="CreateClient" class="btn btn-success btn-sm">+ Добавить</a>
+    </div>
+
+    <ul class="list-group mb-4">
+    @if (clients != null)
+    {
+        foreach (var c in clients)
+        {
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    <b>@c.name</b><br />
+                    <small>ИНН: @c.inn @(string.IsNullOrEmpty(c.phone) ? "" : "• " + c.phone)</small>
+                </div>
+                <div class="btn-group btn-group-sm">
+                    <a asp-action="EditClient" asp-route-id="@c.client_id" class="btn btn-outline-primary">✎</a>
+                    <form asp-action="DeleteClient" asp-route-id="@c.client_id" method="post"
+                          onsubmit="return confirm('Удалить клиента?');">
+                        <button type="submit" class="btn btn-outline-danger">✕</button>
+                    </form>
+                </div>
+            </li>
+        }
+    }
+    </ul>
+
+    <!-- ЗАЯВКИ -->
+    <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="mb-0">Заявки</h5>
+        <a asp-action="CreateTicket" class="btn btn-success btn-sm">+ Добавить</a>
+    </div>
+
+    <ul class="list-group">
+    @if (tickets != null)
+    {
+        foreach (var t in tickets)
+        {
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    <b>@t.subject</b><br />
+                    <small>@t.client_name • @t.type_name • <span class="badge bg-secondary">@t.status_name</span></small>
+                </div>
+                <form asp-action="DeleteTicket" asp-route-id="@t.ticket_id" method="post"
+                      onsubmit="return confirm('Удалить заявку?');">
+                    <button type="submit" class="btn btn-outline-danger btn-sm">✕</button>
+                </form>
+            </li>
+        }
+    }
+    </ul>
+</div>

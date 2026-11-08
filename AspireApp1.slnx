@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="AspireApp1.AppHost/AlfaSoftWeb.csproj" />
+  <Project Path="AspireApp1.Server/AspireApp1.Server.csproj" />
+</Solution>

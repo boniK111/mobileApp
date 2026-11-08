@@ -1,0 +1,5 @@
+wwwroot\alfasoft.db3
+wwwroot\manifest.json
+wwwroot\service-worker.js
+C:\Users\user\source\repos\AspireApp1\AspireApp1.Server\wwwroot\service-worker.js
+C:\Users\user\source\repos\AspireApp1\AspireApp1.Server\wwwroot\manifest.json

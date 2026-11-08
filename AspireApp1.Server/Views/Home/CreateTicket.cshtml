@@ -1,0 +1,47 @@
+@model AlfaSoftWeb.Models.Ticket
+@{
+    ViewData["Title"] = "Новая заявка";
+    var clients  = ViewBag.Clients  as List<AlfaSoftWeb.Models.Client>;
+    var types    = ViewBag.Types    as List<(int id, string name)>;
+    var statuses = ViewBag.Statuses as List<(int id, string name)>;
+}
+
+<div class="container" style="max-width: 500px; padding: 10px;">
+    <h4>Новая заявка</h4>
+    <form asp-action="CreateTicket" method="post">
+        @Html.AntiForgeryToken()
+        <div class="mb-3">
+            <label class="form-label">Клиент</label>
+            <select name="clientId" class="form-select" required>
+                @foreach (var c in clients!)
+                {
+                    <option value="@c.client_id">@c.name</option>
+                }
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Тип</label>
+            <select name="typeId" class="form-select" required>
+                @foreach (var t in types!)
+                {
+                    <option value="@t.id">@t.name</option>
+                }
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Статус</label>
+            <select name="statusId" class="form-select" required>
+                @foreach (var s in statuses!)
+                {
+                    <option value="@s.id">@s.name</option>
+                }
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Тема</label>
+            <input asp-for="subject" class="form-control" required />
+        </div>
+        <button type="submit" class="btn btn-primary w-100 mb-2">Сохранить</button>
+        <a asp-action="Index" class="btn btn-secondary w-100">Назад</a>
+    </form>
+</div>
